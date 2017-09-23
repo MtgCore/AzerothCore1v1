@@ -489,7 +489,7 @@ Battleground* BattlegroundMgr::CreateNewBattleground(BattlegroundTypeId bgTypeId
                 maxPlayersPerTeam = 3;
                 break;
             case ARENA_TYPE_5v5:
-                maxPlayersPerTeam = 5;
+                maxPlayersPerTeam = 1; // 1v1 Arena
                 break;
         }
 

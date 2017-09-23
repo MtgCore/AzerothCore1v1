@@ -24,6 +24,9 @@
 #include "Group.h"
 #include "ScriptMgr.h"
 
+#include "../../../modules/mod-1vs1/src/npc_arena1v1.h"
+
+
 void WorldSession::HandleBattlemasterHelloOpcode(WorldPacket & recvData)
 {
     uint64 guid;
@@ -426,6 +429,10 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket &recvData)
     {
         case 1: // accept
             {
+                // 1v1 Arena. Player can't join arena when forbidden talents are used.
+                if (bgQueueTypeId == BATTLEGROUND_QUEUE_5v5 && Arena1v1CheckTalents(_player) == false)
+                    return;
+
                 // set entry point if not in battleground
                 if (!_player->InBattleground())
                     _player->SetEntryPoint();
